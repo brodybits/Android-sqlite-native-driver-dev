@@ -78,11 +78,25 @@ sqlc_long_t sqlc_db_last_insert_rowid(sqlc_handle_t db)
   return sqlite3_last_insert_rowid(mydb);
 }
 
+int sqlc_db_changes(sqlc_handle_t db)
+{
+  sqlite3 *mydb = HANDLE_TO_VP(db);
+
+  return sqlite3_changes(mydb);
+}
+
 int sqlc_db_total_changes(sqlc_handle_t db)
 {
   sqlite3 *mydb = HANDLE_TO_VP(db);
 
   return sqlite3_total_changes(mydb);
+}
+
+int sqlc_st_bind_parameter_count(sqlc_handle_t st)
+{
+  sqlite3_stmt *myst = HANDLE_TO_VP(st);
+
+  return sqlite3_bind_parameter_count(myst);
 }
 
 int sqlc_st_bind_double(sqlc_handle_t st, int pos, double val)
@@ -192,6 +206,20 @@ int sqlc_st_finish(sqlc_handle_t st)
   //__android_log_print(ANDROID_LOG_VERBOSE, "sqlg", "%s %p", __func__, myst);
 
   return sqlite3_finalize(myst);
+}
+
+int sqlc_st_reset(sqlc_handle_t st)
+{
+  sqlite3_stmt *myst = HANDLE_TO_VP(st);
+
+  return sqlite3_reset(myst);
+}
+
+int sqlc_st_clear_bindings(sqlc_handle_t st)
+{
+  sqlite3_stmt *myst = HANDLE_TO_VP(st);
+
+  return sqlite3_clear_bindings(myst);
 }
 
 int sqlc_db_close(sqlc_handle_t db)

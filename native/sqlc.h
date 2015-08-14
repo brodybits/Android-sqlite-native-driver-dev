@@ -50,7 +50,10 @@ int sqlc_db_key_native_string(sqlc_handle_t db, char *key_string);
 sqlc_handle_t sqlc_db_prepare_st(sqlc_handle_t db, const char *sql);
 
 sqlc_long_t sqlc_db_last_insert_rowid(sqlc_handle_t db);
+int sqlc_db_changes(sqlc_handle_t db);
 int sqlc_db_total_changes(sqlc_handle_t db);
+
+int sqlc_st_bind_parameter_count(sqlc_handle_t st);
 
 // FUTURE TBD bind blob:
 //  int sqlc_st_bind_blob(sqlc_handle_t st, int pos, const void *val, int len); // ??
@@ -79,6 +82,9 @@ const char *sqlc_st_column_text_native(sqlc_handle_t st, int col);
 //  const char *sqlc_st_column_text_string(sqlc_handle_t st, int col);
 
 int sqlc_st_finish(sqlc_handle_t st); /* call sqlite3_finalize() */
+
+int sqlc_st_reset(sqlc_handle_t st);
+int sqlc_st_clear_bindings(sqlc_handle_t st);
 
 int sqlc_db_close(sqlc_handle_t db);
 

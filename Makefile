@@ -13,8 +13,9 @@ ndkbuild:
 	rm -rf lib libs
 	ndk-build
 	mv libs lib
-	jar cf sqlite-native-driver.jar lib
+	# for test:
+	jar cf sqlite-native-driver-arm.jar lib
 
 clean:
-	rm -rf obj lib libs sqlite-native-driver.jar
+	rm -rf obj lib libs *.jar
 
